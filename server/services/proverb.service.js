@@ -23,5 +23,6 @@ export default class ProverbService {
    */
   static async updateProverb(data, id) {
     const proverb = await Proverb.update(data, { where: { id } });
+    return proverb;
   }
 }
