@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 chai.should();
 
 const { welcomeMessage } = customMessage;
-const { ok } = statusCode;
+const { HTTP_OK } = statusCode;
 
 describe('Welcome endpoint', () => {
   it('Should test welcome endpoint', (done) => {
@@ -17,7 +17,7 @@ describe('Welcome endpoint', () => {
       .get('/')
       .end((err, res) => {
         const { message } = res.body;
-        expect(res.status).to.equal(ok);
+        expect(res.status).to.equal(HTTP_OK);
         expect(message);
         expect(message).to.be.a('string');
         expect(message).to.equal(welcomeMessage);

@@ -12,7 +12,9 @@
     "undo": "npx sequelize-cli db:migrate:undo:all",
     "seed": "npx sequelize-cli db:seed:all",
     "undo-seed": "npx sequelize-cli db:seed:undo",
+    "pretest": "npx sequelize-cli db:create && npx sequelize-cli db:migrate",
     "test": "cross-env NODE_ENV=test && nyc mocha --require @babel/register --timeout 10000 --exit ./server/tests/**/*.js",
+    "posttest": "npx sequelize-cli db:drop",
     "coveralls": "cat coverage/lcov.info | coveralls"
   },
   "repository": {

@@ -14,8 +14,7 @@ app.use(bodyParser.json());
 app.use(express.static(`${__dirname}/public`));
 app.use(routes);
 
-// finally, let's start our server...
-const server = app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT || 3000, () => {
   console.log(`Listening on port ${server.address().port}`);
 });
 export default app;

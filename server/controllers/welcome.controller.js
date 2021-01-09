@@ -1,9 +1,9 @@
-import responseHandler from '../constants/responseHandler.util';
+import responseHandler from '../utils/responseHandler.util';
 import customMessage from '../constants/customMessage';
 import statusCode from '../constants/statusCodes';
 
 const { updatedResponse } = responseHandler;
-const { ok } = statusCode;
+const { HTTP_OK } = statusCode;
 const { welcomeMessage } = customMessage;
 /**
  * @description this is a welcome endpoint
@@ -12,5 +12,5 @@ const { welcomeMessage } = customMessage;
  * @returns {object} success response message
  */
 export default function (req, res) {
-  return updatedResponse(res, ok, welcomeMessage);
+  return updatedResponse(res, HTTP_OK, welcomeMessage);
 }

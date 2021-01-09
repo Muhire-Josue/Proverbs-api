@@ -40,5 +40,4 @@ exclude_patterns:
   - 'server/database/migrations/'
   - 'server/database/models'
   - 'server/database/seeders'
-  - 'server/validations/signup.validation.js'
-  - 'tests/'
+  - 'server/tests/'
