@@ -3,7 +3,8 @@ import ProverbController from '../controllers/proverb.controller';
 import proverbInputValidation from '../validations/proverb.validation';
 
 const route = express.Router();
-const { createProverb } = ProverbController;
+const { createProverb, editProverb } = ProverbController;
 
 route.post('/proverb/add', proverbInputValidation, createProverb);
+route.put('/proverb/edit', proverbInputValidation, editProverb);
 export default route;
