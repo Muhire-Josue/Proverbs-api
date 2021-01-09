@@ -24,4 +24,38 @@ export default class ProverbService {
   static async updateProverb(data, id) {
     await Proverb.update(data, { where: { id } });
   }
+
+  /**
+   * @description find all proverbs in the db
+   * @param {string} postedBy
+   * @returns {null} it returns all proverbs from the db
+   */
+  static async findAllProverbs(postedBy) {
+    let proverbs;
+    if (!postedBy || postedBy === undefined) {
+      proverbs = await Proverb.findAll();
+    } else {
+      proverbs = await Proverb.findAll({ where: { postedBy } });
+    }
+    return proverbs;
+  }
+
+  /**
+   * @description find all proverbs in the db
+   * @param {integer} id
+   * @returns {object} it returns a proverb
+   */
+  static async findProverbById(id) {
+    const proverb = await Proverb.findOne({ where: { id } });
+    return proverb;
+  }
+
+  /**
+   * @description delete a proverb
+   * @param {integer} id
+   * @returns {null} it returns nothing
+   */
+  static async deleteProverbById(id) {
+    await Proverb.destroy({ where: { id } });
+  }
 }

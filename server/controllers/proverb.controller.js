@@ -3,10 +3,18 @@ import statusCode from '../constants/statusCodes';
 import customMessage from '../constants/customMessage';
 import responseHandler from '../utils/responseHandler.util';
 
-const { saveProverb, updateProverb } = ProverbService;
+const {
+  saveProverb,
+  updateProverb,
+  findAllProverbs,
+  findProverbById,
+  deleteProverbById
+} = ProverbService;
 
 const { HTTP_CREATED, HTTP_OK } = statusCode;
-const { PROVERB_SAVED, PROVERB_UPDATED } = customMessage;
+const {
+  PROVERB_SAVED, PROVERB_UPDATED, ALL_PROVERBS, DELETE_PROVERB
+} = customMessage;
 const { successResponse, updatedResponse } = responseHandler;
 
 /**
@@ -38,5 +46,64 @@ export default class ProverbController {
     const proverb = req.body;
     await updateProverb(proverb, id);
     return updatedResponse(res, HTTP_OK, PROVERB_UPDATED);
+  }
+
+  /**
+   * @description find all proverbs
+   * @param {Request} req
+   * @param {Response} res
+   * @returns {object} it returns tall proverbs
+   */
+  static async getAllProverbs(req, res) {
+    const proverbs = await findAllProverbs();
+    return successResponse(res, HTTP_OK, ALL_PROVERBS, proverbs);
+  }
+
+  /**
+   * @description find all proverbs
+   * @param {Request} req
+   * @param {Response} res
+   * @returns {object} it returns tall proverbs
+   */
+  static async getAllProverbsByPostedBy(req, res) {
+    const postedBy = req.session.username ? req.session.username : 'Anonymous';
+    const proverbs = await findAllProverbs(postedBy);
+    return successResponse(res, HTTP_OK, ALL_PROVERBS, proverbs);
+  }
+
+  /**
+   * @description find all proverbs
+   * @param {Request} req
+   * @param {Response} res
+   * @returns {object} it returns all proverbs
+   */
+  static async getAllProverbsByUser(req, res) {
+    const { postedBy } = req.params;
+    const proverbs = await findAllProverbs(postedBy);
+    return successResponse(res, HTTP_OK, ALL_PROVERBS, proverbs);
+  }
+
+  /**
+   * @description find proverb by id
+   * @param {Request} req
+   * @param {Response} res
+   * @returns {object} it returns a proverb
+   */
+  static async getProverbById(req, res) {
+    const { proverbId } = req.params;
+    const proverb = await findProverbById(proverbId);
+    return successResponse(res, HTTP_OK, ALL_PROVERBS, proverb);
+  }
+
+  /**
+   * @description deletes a proverb by id
+   * @param {Request} req
+   * @param {Response} res
+   * @returns {object} it returns a success message
+   */
+  static async deleteProverb(req, res) {
+    const { proverbId } = req.params;
+    await deleteProverbById(proverbId);
+    return updatedResponse(res, HTTP_OK, DELETE_PROVERB);
   }
 }

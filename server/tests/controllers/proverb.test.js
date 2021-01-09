@@ -13,11 +13,14 @@ const {
   USER_CREATED,
   PROVERB_SAVED,
   PROVERB_INVALID_VALUES,
-  PROVERB_UPDATED
+  PROVERB_UPDATED,
+  ALL_PROVERBS,
+  DELETE_PROVERB
 } = customMessage;
 const { HTTP_OK, HTTP_BAD_REQUEST, HTTP_CREATED } = statusCode;
 
 let proverbId;
+let postedBy;
 
 describe('User endpoint', () => {
   it('Should successfully create a user', (done) => {
@@ -41,6 +44,8 @@ describe('User endpoint', () => {
       .end((err, res) => {
         const { message, data } = res.body;
         proverbId = data.id;
+        postedBy = data.postedBy;
+
         expect(res.status).to.equal(HTTP_CREATED);
         expect(message);
         expect(data);
@@ -73,6 +78,77 @@ describe('User endpoint', () => {
         expect(res.status).to.equal(HTTP_OK);
         expect(message);
         expect(message).to.equal(PROVERB_UPDATED);
+        done();
+      });
+  });
+
+  it('Should display all proverbs', (done) => {
+    chai
+      .request(server)
+      .get('/proverbs')
+      .end((err, res) => {
+        const { message, data } = res.body;
+        expect(res.status).to.equal(HTTP_OK);
+        expect(message);
+        expect(data);
+        expect(data).to.be.an('array');
+        expect(message).to.equal(ALL_PROVERBS);
+        done();
+      });
+  });
+
+  it('Should display all proverbs of a user', (done) => {
+    chai
+      .request(server)
+      .get('/proverbs/mine')
+      .end((err, res) => {
+        const { message, data } = res.body;
+        expect(res.status).to.equal(HTTP_OK);
+        expect(message);
+        expect(data);
+        expect(data).to.be.an('array');
+        expect(message).to.equal(ALL_PROVERBS);
+        done();
+      });
+  });
+
+  it('Should display all proverbs of a user via params', (done) => {
+    chai
+      .request(server)
+      .get(`/proverbs/${postedBy}`)
+      .end((err, res) => {
+        const { message, data } = res.body;
+        expect(res.status).to.equal(HTTP_OK);
+        expect(message);
+        expect(data);
+        expect(data).to.be.an('array');
+        expect(message).to.equal(ALL_PROVERBS);
+        done();
+      });
+  });
+  it('Should display a proverb by id', (done) => {
+    chai
+      .request(server)
+      .get(`/proverb/${proverbId}`)
+      .end((err, res) => {
+        const { message, data } = res.body;
+        expect(res.status).to.equal(HTTP_OK);
+        expect(message);
+        expect(data);
+        expect(data).to.be.an('object');
+        expect(message).to.equal(ALL_PROVERBS);
+        done();
+      });
+  });
+  it('Should delete a proverb by id', (done) => {
+    chai
+      .request(server)
+      .delete(`/proverb/${proverbId}`)
+      .end((err, res) => {
+        const { message } = res.body;
+        expect(res.status).to.equal(HTTP_OK);
+        expect(message);
+        expect(message).to.equal(DELETE_PROVERB);
         done();
       });
   });
