@@ -7,7 +7,8 @@ const { saveProverb, updateProverb } = ProverbService;
 
 const { HTTP_CREATED, HTTP_OK } = statusCode;
 const { PROVERB_SAVED, PROVERB_UPDATED } = customMessage;
-const { successResponse } = responseHandler;
+const { successResponse, updatedResponse } = responseHandler;
+
 /**
  * Proverb controller
  */
@@ -35,7 +36,7 @@ export default class ProverbController {
   static async editProverb(req, res) {
     const { id } = req.params;
     const proverb = req.body;
-    const updatedProverb = await updateProverb(proverb, id);
-    return successResponse(res, HTTP_OK, PROVERB_UPDATED, updatedProverb);
+    await updateProverb(proverb, id);
+    return updatedResponse(res, HTTP_OK, PROVERB_UPDATED);
   }
 }

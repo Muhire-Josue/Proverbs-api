@@ -6,5 +6,5 @@ const route = express.Router();
 const { createProverb, editProverb } = ProverbController;
 
 route.post('/proverb/add', proverbInputValidation, createProverb);
-route.put('/proverb/edit', proverbInputValidation, editProverb);
+route.put('/proverb/edit/:id', proverbInputValidation, editProverb);
 export default route;

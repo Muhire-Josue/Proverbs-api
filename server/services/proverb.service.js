@@ -19,10 +19,9 @@ export default class ProverbService {
    * @description update a proverb in the db
    * @param {integer} data
    * @param {integer} id id of a proverb
-   * @returns {object} it returns the updated object
+   * @returns {null} it returns null
    */
   static async updateProverb(data, id) {
-    const proverb = await Proverb.update(data, { where: { id } });
-    return proverb;
+    await Proverb.update(data, { where: { id } });
   }
 }

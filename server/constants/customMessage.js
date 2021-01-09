@@ -4,6 +4,6 @@ const messages = {
   INVALID_USERNAME: 'Please provide a valid username',
   PROVERB_SAVED: 'Proverb saved successfully',
   PROVERB_INVALID_VALUES: 'Values should not be empty',
-  PROVERB_UPDATED: 'Proverb validated successfully'
+  PROVERB_UPDATED: 'Proverb updated successfully'
 };
 export default messages;
