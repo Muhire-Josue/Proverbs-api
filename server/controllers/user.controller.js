@@ -18,7 +18,7 @@ export default class UserController {
    */
   static createUser(req, res) {
     const { name } = req.body;
-    req.username = name;
+    req.session.username = name;
     return successResponse(res, HTTP_OK, USER_CREATED, undefined);
   }
 }
