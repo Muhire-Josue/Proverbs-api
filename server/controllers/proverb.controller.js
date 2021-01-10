@@ -42,9 +42,9 @@ export default class ProverbController {
    * @returns {object} it returns the updated proverb
    */
   static async editProverb(req, res) {
-    const { id } = req.params;
+    const { proverbId } = req.params;
     const proverb = req.body;
-    await updateProverb(proverb, id);
+    await updateProverb(proverb, proverbId);
     return updatedResponse(res, HTTP_OK, PROVERB_UPDATED);
   }
 

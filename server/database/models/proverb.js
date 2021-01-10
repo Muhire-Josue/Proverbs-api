@@ -12,6 +12,13 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE'
     });
+
+    Proverb.hasMany(models.Comment, {
+      as: 'comments',
+      foreignKey: 'proverbId',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE'
+    });
   };
   return Proverb;
 };

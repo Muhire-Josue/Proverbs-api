@@ -15,14 +15,18 @@ const {
   PROVERB_INVALID_VALUES,
   PROVERB_UPDATED,
   ALL_PROVERBS,
-  DELETE_PROVERB
+  DELETE_PROVERB,
+  PROVERB_NOT_FOUND
 } = customMessage;
-const { HTTP_OK, HTTP_BAD_REQUEST, HTTP_CREATED } = statusCode;
+const {
+  HTTP_OK, HTTP_BAD_REQUEST,
+  HTTP_CREATED, HTTP_NOT_FOUND
+} = statusCode;
 
 let proverbId;
 let postedBy;
 
-describe('User endpoint', () => {
+describe('Proverbs tests', () => {
   it('Should successfully create a user', (done) => {
     chai
       .request(server)
@@ -78,6 +82,20 @@ describe('User endpoint', () => {
         expect(res.status).to.equal(HTTP_OK);
         expect(message);
         expect(message).to.equal(PROVERB_UPDATED);
+        done();
+      });
+  });
+
+  it('Should not update a proverb', (done) => {
+    chai
+      .request(server)
+      .put('/proverb/edit/0')
+      .send(proverbMoch[2])
+      .end((err, res) => {
+        const { error } = res.body;
+        expect(res.status).to.equal(HTTP_NOT_FOUND);
+        expect(error);
+        expect(error).to.equal(PROVERB_NOT_FOUND);
         done();
       });
   });

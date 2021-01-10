@@ -1,12 +1,18 @@
 const messages = {
-  welcomeMessage: 'Welcome to this API',
+  COMMENT_SAVED: 'Comment saved successfully',
+  COMMENT_EDITED: 'Comment edited successfully',
+  COMMENT_DELETED: 'Comment deleted successfully',
   USER_CREATED: 'User created successfully',
-  INVALID_USERNAME: 'Please provide a valid username',
   PROVERB_SAVED: 'Proverb saved successfully',
-  PROVERB_INVALID_VALUES: 'Values should not be empty',
+  PROVERB_LIKED: 'Proverb like or unlike successfully',
   PROVERB_UPDATED: 'Proverb updated successfully',
-  ALL_PROVERBS: 'All proverbs',
   DELETE_PROVERB: 'Proverb deleted successfully',
-  PROVERB_LIKED: 'Proverb like or unlike successfully'
+  ALL_PROVERBS: 'All proverbs',
+  welcomeMessage: 'Welcome to this API',
+  INVALID_USERNAME: 'Please provide a valid username',
+  PROVERB_INVALID_VALUES: 'Values should not be empty',
+  EDIT_COMMENT_FAILED: 'Please provide a name first',
+  PROVERB_NOT_FOUND: 'Proverb not found'
+
 };
 export default messages;

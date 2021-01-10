@@ -1,47 +1,81 @@
-# express-app-starter
+### API BASE URL
 
-This is a quicker starter template for express and node applications. Have the folder structure, eslint and babel configurations and tests ready for your Express application.
+##### Local: http://localhost:3000
 
 ### Requirements
+
 - `Nodejs v10-13` - a JavaScript run-time environment that executes JavaScript code outside of a browser
 - `POSTGRES` - a database management system for data persistence
-- `.env.example` - a file that contains all the variable environment for this project
+- `.env.example` - contains all the variable environment for this project
 
-## Installation
+### SETUP
 
-Use the package manager [npm](https://www.npmjs.com/) to install dependencies and running some pre-defined scripts.
+First clone it to your machine:
 
-Download the project
-```bash
-git clone https://github.com/Muhire-Josue/express-app-starter.git
 ```
-cd into the project
-```bash
-cd express-app-starter/
+https://github.com/Muhire-Josue/Proverbs-api.git
 ```
-Install dependencies
-```bash
+
+```
+Create a file called .env, copy all environment variables from .ENV.EXAMPLE and fill in their respective values (this will allow you to connect to the database among other things)
+```
+
+Open it using your favorite IDE,
+I used ([vs code](https://code.visualstudio.com/download))
+
+Install all necessary node modules
+
+```
 npm install
 ```
-Tests
-```bash
-npm install
+
+Create a database
+
 ```
-Run server
-```bash
+npm run create-db
+```
+
+Run the migrations (to map the models to the database relations)
+
+```
+npm run migrations
+```
+
+To start the app
+
+```
 npm run dev
 ```
 
-## Usage
+To run tests
 
 ```
-Head over to postman (or web browser) and hit this URL GET: http://localhost:3000
+npm test
 ```
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+### API ENDPOINTS
 
-Please make sure to update tests as appropriate.
+| API                                  | Methods | Description                |
+| ------------------------------------ | ------- | -------------------------- |
+| `/`                                  | GET     | Welcome message            |
+| `/user`                              | POST    | Choose a name              |
+| `/proverb/add`                       | POST    | Post a proverb             |
+| `/proverb/edit/:proverbId`           | PUT     | Edit a proverb             |
+| `/proverbs`                          | GET     | Get all proverbs           |
+| `/proverbs/mine`                     | GET     | Get all your proverbs      |
+| `/proverbs/:postedBy`                | GET     | Get all proverbs of a user |
+| `/proverb/:proverId`                 | GET     | Get a proverb by id        |
+| `/proverb/:proverId`                 | DELETE  | Delete a proverb           |
+| `/proverb/like`                      | POST    | like and unlike a proverb  |
+| `/proverb/comment`                   | GET     | Comment a proverb          |
+| `/proverb/comment/edit`              | PUT     | Edit a comment             |
+| `/proverb/comment/delete/:commentId` | DELETE  | Delete a comment           |
 
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
+### How can it be manually tested
+
+- using [postman](https://www.getpostman.com/downloads/)
+
+### Technologies used
+
+- `YARN` - a package manager for the JavaScript programming language
+- `Git` - version-control system for tracking changes in source code during software development
