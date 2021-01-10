@@ -6,6 +6,7 @@ const messages = {
   PROVERB_INVALID_VALUES: 'Values should not be empty',
   PROVERB_UPDATED: 'Proverb updated successfully',
   ALL_PROVERBS: 'All proverbs',
-  DELETE_PROVERB: 'Proverb deleted successfully'
+  DELETE_PROVERB: 'Proverb deleted successfully',
+  PROVERB_LIKED: 'Proverb like or unlike successfully'
 };
 export default messages;

@@ -3,10 +3,15 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     description: DataTypes.STRING,
     postedBy: DataTypes.STRING,
-    likes: DataTypes.INTEGER
   }, {});
   Proverb.associate = (models) => {
     // associations can be defined here
+    Proverb.hasMany(models.Like, {
+      as: 'likes',
+      foreignKey: 'proverbId',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE'
+    });
   };
   return Proverb;
 };

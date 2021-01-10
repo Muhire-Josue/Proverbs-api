@@ -2,6 +2,7 @@ import ProverbService from '../services/proverb.service';
 import statusCode from '../constants/statusCodes';
 import customMessage from '../constants/customMessage';
 import responseHandler from '../utils/responseHandler.util';
+import countLikesInArrayOfProverbs from '../utils/countLikes.util';
 
 const {
   saveProverb,
@@ -29,7 +30,6 @@ export default class ProverbController {
    */
   static async createProverb(req, res) {
     const proverb = req.body;
-    proverb.likes = 0;
     proverb.postedBy = req.session.username ? req.session.username : 'Anonymous';
     const createdProverb = await saveProverb(proverb);
     return successResponse(res, HTTP_CREATED, PROVERB_SAVED, createdProverb);
@@ -56,7 +56,8 @@ export default class ProverbController {
    */
   static async getAllProverbs(req, res) {
     const proverbs = await findAllProverbs();
-    return successResponse(res, HTTP_OK, ALL_PROVERBS, proverbs);
+    const proverbsWithNumberOfLikes = countLikesInArrayOfProverbs(proverbs);
+    return successResponse(res, HTTP_OK, ALL_PROVERBS, proverbsWithNumberOfLikes);
   }
 
   /**
@@ -68,7 +69,8 @@ export default class ProverbController {
   static async getAllProverbsByPostedBy(req, res) {
     const postedBy = req.session.username ? req.session.username : 'Anonymous';
     const proverbs = await findAllProverbs(postedBy);
-    return successResponse(res, HTTP_OK, ALL_PROVERBS, proverbs);
+    const proverbsWithNumberOfLikes = countLikesInArrayOfProverbs(proverbs);
+    return successResponse(res, HTTP_OK, ALL_PROVERBS, proverbsWithNumberOfLikes);
   }
 
   /**

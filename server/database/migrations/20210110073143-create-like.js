@@ -1,18 +1,15 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('Proverbs', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('Likes', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: Sequelize.INTEGER
     },
-    title: {
-      type: Sequelize.STRING
+    proverbId: {
+      type: Sequelize.INTEGER
     },
-    description: {
-      type: Sequelize.STRING
-    },
-    postedBy: {
+    likedBy: {
       type: Sequelize.STRING
     },
     createdAt: {
@@ -24,5 +21,5 @@ module.exports = {
       type: Sequelize.DATE
     }
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('Proverbs')
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('Likes')
 };

@@ -1,6 +1,6 @@
 import models from '../database/models/index';
 
-const { Proverb } = models;
+const { Proverb, Like } = models;
 /**
  * @description Proverb services
  */
@@ -33,9 +33,14 @@ export default class ProverbService {
   static async findAllProverbs(postedBy) {
     let proverbs;
     if (!postedBy || postedBy === undefined) {
-      proverbs = await Proverb.findAll();
+      proverbs = await Proverb.findAll({
+        include: [{ model: Like, as: 'likes' }]
+      });
     } else {
-      proverbs = await Proverb.findAll({ where: { postedBy } });
+      proverbs = await Proverb.findAll({
+        where: { postedBy },
+        include: [{ model: Like, as: 'likes' }]
+      });
     }
     return proverbs;
   }
