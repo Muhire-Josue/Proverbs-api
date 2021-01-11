@@ -31,7 +31,6 @@ export const validateCommentId = async (req, res, next) => {
  * @returns {object} it returns an error message if the comment is not found
  */
 export const checkCommentExist = async (req, res, next) => {
-
   const { commentId } = req.params;
   const comment = await findCommentById(commentId);
   if (!comment) {
