@@ -12,7 +12,9 @@ const messages = {
   INVALID_USERNAME: 'Please provide a valid username',
   PROVERB_INVALID_VALUES: 'Values should not be empty',
   EDIT_COMMENT_FAILED: 'Please provide a name first',
-  PROVERB_NOT_FOUND: 'Proverb not found'
+  PROVERB_NOT_FOUND: 'Proverb not found',
+  INVALID_COMMENTID: 'Please provide commentId',
+  COMMENT_NOT_FOUND: 'Comment not found'
 
 };
 export default messages;

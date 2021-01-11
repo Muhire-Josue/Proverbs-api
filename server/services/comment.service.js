@@ -35,4 +35,14 @@ export default class CommentService {
   static async deleteComment(id, commentedBy) {
     await Comment.destroy({ where: { id, commentedBy } });
   }
+
+  /**
+   * @description finds and returns a comment
+   * @param {integer} id
+   * @returns {object} it returns a comment from the db
+   */
+  static async findCommentById(id) {
+    const comment = await Comment.findOne({ where: { id } });
+    return comment;
+  }
 }
