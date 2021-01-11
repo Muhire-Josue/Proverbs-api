@@ -15,9 +15,17 @@ const {
   COMMENT_SAVED,
   COMMENT_EDITED,
   COMMENT_DELETED,
-  EDIT_COMMENT_FAILED
+  EDIT_COMMENT_FAILED,
+  INVALID_COMMENTID,
+  COMMENT_NOT_FOUND
 } = customMessage;
-const { HTTP_OK, HTTP_UNAUTHORIZED, HTTP_CREATED } = statusCode;
+const {
+  HTTP_OK,
+  HTTP_UNAUTHORIZED,
+  HTTP_CREATED,
+  HTTP_NOT_FOUND,
+  HTTP_BAD_REQUEST
+} = statusCode;
 
 let proverbId;
 let proverbId2;
@@ -59,8 +67,8 @@ describe('comment tests', () => {
   it('Should successfully comment a proverb', (done) => {
     chai
       .request(server)
-      .post('/proverb/comment')
-      .send({ comment: 'umugani mwiza cyane', proverbId })
+      .post(`/proverb/${proverbId}/comment`)
+      .send({ comment: 'umugani mwiza cyane' })
       .end((err, res) => {
         const { message, data } = res.body;
         commentId = data.id;
@@ -77,13 +85,40 @@ describe('comment tests', () => {
   it('Should not edit a comment', (done) => {
     chai
       .request(server)
-      .put('/proverb/comment/edit')
-      .send({ comment: 'umugani mwiza cyane', commentId })
+      .put(`/proverb/comment/edit/${commentId}`)
+      .send({ comment: 'umugani mwiza cyane' })
       .end((err, res) => {
         const { error } = res.body;
         expect(res.status).to.equal(HTTP_UNAUTHORIZED);
         expect(error);
         expect(error).to.equal(EDIT_COMMENT_FAILED);
+        done();
+      });
+  });
+  it('Should not edit a comment with an invalid commentId', (done) => {
+    chai
+      .request(server)
+      .put('/proverb/comment/edit/abc')
+      .send({ comment: 'umugani mwiza cyane' })
+      .end((err, res) => {
+        const { error } = res.body;
+        expect(res.status).to.equal(HTTP_BAD_REQUEST);
+        expect(error);
+        expect(error).to.equal(INVALID_COMMENTID);
+        done();
+      });
+  });
+
+  it('Should not edit a comment if comment is not found', (done) => {
+    chai
+      .request(server)
+      .put('/proverb/comment/edit/0')
+      .send({ comment: 'umugani mwiza cyane' })
+      .end((err, res) => {
+        const { error } = res.body;
+        expect(res.status).to.equal(HTTP_NOT_FOUND);
+        expect(error);
+        expect(error).to.equal(COMMENT_NOT_FOUND);
         done();
       });
   });

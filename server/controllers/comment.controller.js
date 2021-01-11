@@ -24,7 +24,8 @@ export default class CommentController {
    * @returns {object} it returns the comments submitted
    */
   static async CommentProverb(req, res) {
-    const { proverbId, comment } = req.body;
+    const { comment } = req.body;
+    const { proverbId } = req.params;
     const commentedBy = req.session.username ? req.session.username : 'Anonymous';
     const proverbComment = { comment, proverbId, commentedBy };
     const savedComment = await saveComment(proverbComment);

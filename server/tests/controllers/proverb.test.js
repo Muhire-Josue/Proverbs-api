@@ -16,7 +16,8 @@ const {
   PROVERB_UPDATED,
   ALL_PROVERBS,
   DELETE_PROVERB,
-  PROVERB_NOT_FOUND
+  PROVERB_NOT_FOUND,
+  INVALID_PROVERBID
 } = customMessage;
 const {
   HTTP_OK, HTTP_BAD_REQUEST,
@@ -86,7 +87,7 @@ describe('Proverbs tests', () => {
       });
   });
 
-  it('Should not update a proverb', (done) => {
+  it('Should not update a proverb if the proverb is not found', (done) => {
     chai
       .request(server)
       .put('/proverb/edit/0')
@@ -96,6 +97,20 @@ describe('Proverbs tests', () => {
         expect(res.status).to.equal(HTTP_NOT_FOUND);
         expect(error);
         expect(error).to.equal(PROVERB_NOT_FOUND);
+        done();
+      });
+  });
+
+  it('Should not update a proverb with invalid ID', (done) => {
+    chai
+      .request(server)
+      .put('/proverb/edit/abc')
+      .send(proverbMoch[2])
+      .end((err, res) => {
+        const { error } = res.body;
+        expect(res.status).to.equal(HTTP_BAD_REQUEST);
+        expect(error);
+        expect(error).to.equal(INVALID_PROVERBID);
         done();
       });
   });

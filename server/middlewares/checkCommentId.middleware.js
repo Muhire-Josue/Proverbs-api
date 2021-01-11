@@ -17,7 +17,7 @@ const { findCommentById } = CommentService;
  */
 export const validateCommentId = async (req, res, next) => {
   const { commentId } = req.params;
-  if (Number.isInteger(parseInt(commentId, 10))) {
+  if (!Number.isInteger(parseInt(commentId, 10))) {
     return errorResponse(res, HTTP_BAD_REQUEST, INVALID_COMMENTID);
   }
   return next();

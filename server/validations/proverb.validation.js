@@ -3,7 +3,7 @@ import customMessage from '../constants/customMessage';
 import responseHandler from '../utils/responseHandler.util';
 
 const { errorResponse } = responseHandler;
-const { PROVERB_INVALID_VALUES } = customMessage;
+const { PROVERB_INVALID_VALUES, INVALID_PROVERBID } = customMessage;
 const { HTTP_BAD_REQUEST } = statusCode;
 
 /**
@@ -20,4 +20,5 @@ const proverbInputValidation = (req, res, next) => {
   }
   return next();
 };
+
 export default proverbInputValidation;

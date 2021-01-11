@@ -67,8 +67,8 @@ npm test
 | `/proverb/:proverId`                 | GET     | Get a proverb by id        |
 | `/proverb/:proverId`                 | DELETE  | Delete a proverb           |
 | `/proverb/like`                      | POST    | like and unlike a proverb  |
-| `/proverb/comment`                   | GET     | Comment a proverb          |
-| `/proverb/comment/edit`              | PUT     | Edit a comment             |
+| `/proverb/:proverbId/comment`        | GET     | Comment a proverb          |
+| `/proverb/comment/:commentId/edit`   | PUT     | Edit a comment             |
 | `/proverb/comment/delete/:commentId` | DELETE  | Delete a comment           |
 
 ### How can it be manually tested
