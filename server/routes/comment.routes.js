@@ -5,7 +5,7 @@ const route = express.Router();
 const { CommentProverb, editComment, removeComment } = CommentController;
 
 route.post('/proverb/comment', CommentProverb);
-route.put('/proverb/comment/edit', editComment);
+route.put('/proverb/comment/edit/:commentId', editComment);
 route.delete('/proverb/comment/delete/:commentId', removeComment);
 
 export default route;

@@ -38,7 +38,8 @@ export default class CommentController {
    * @returns {object} it returns a success message
    */
   static async editComment(req, res) {
-    const { comment, commentId } = req.body;
+    const { comment } = req.body;
+    const { commentId } = req.params;
     const commentedBy = req.session.username;
     if (!commentedBy) {
       return errorResponse(res, HTTP_UNAUTHORIZED, EDIT_COMMENT_FAILED);
