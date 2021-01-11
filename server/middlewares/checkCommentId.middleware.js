@@ -35,6 +35,7 @@ export const checkCommentExist = async (req, res, next) => {
   const { commentId } = req.params;
   const comment = await findCommentById(commentId);
   if (!comment) {
-
+    return errorResponse(res, HTTP_NOT_FOUND, COMMENT_NOT_FOUND);
   }
+  return next();
 };
